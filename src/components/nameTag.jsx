@@ -22,8 +22,8 @@ const NameTag = (props) => {
     return (
         <div style={nameStyle}>
     
-          <h3 >First Name: {props.firstName}</h3>
-          <h3 >LastName: {props.lastName}</h3>
+          <h3 style={props.style}>First Name: {props.firstName}</h3>
+          <h3 style={props.style}>LastName: {props.lastName}</h3>
      {
          props.firstName==="John" && <div style={{color:'green'}}>VIP</div> 
      }
