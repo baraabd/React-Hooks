@@ -7,9 +7,9 @@ function App() {
     <div>
       <header className="App-header">
         <h1 className="nameStyle nameTagTitle">Names List</h1>
-        <NameTag >Peter</NameTag>
-        <NameTag >Joli</NameTag>
-        <NameTag >Hanna</NameTag>
+        <NameTag firstName="Peter" lastName="Anderson"></NameTag>
+        <NameTag firstName="Joli" lastName="Johanson"></NameTag>
+        <NameTag firstName="Hanna" lastName="Peterson"></NameTag>
 
       </header>
     </div>
