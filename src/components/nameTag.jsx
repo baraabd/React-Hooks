@@ -10,7 +10,7 @@ const nameStyle = {
 const NameTag = (props) => {
     return (
         <div className="App">
-          <h3 style={nameStyle}>{props.name}</h3>
+          <h3 style={nameStyle}>{props.children}</h3>
       </div>
     );
 };
