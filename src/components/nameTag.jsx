@@ -13,7 +13,7 @@ const nameStyle = {
 const NameTag = (props) => {
     return (
         <div style={nameStyle}>
-       
+    
           <h3 >First Name: {props.firstName}</h3>
           <h3 >LastName: {props.lastName}</h3>
      
