@@ -44,10 +44,22 @@
   width: 300px;
 }
 
-.nameTagTitle{
+.nameTagTitle {
   color: yellow;
   border-color: yellow;
   border-style: dotted;
   width: 300px;
   padding: 10px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonStyle {
+  width: 100px;
+  color: black;
+  height: 40px;
+  margin: 5px;
 }
