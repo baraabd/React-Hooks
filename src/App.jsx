@@ -2,44 +2,35 @@ import react, { useState } from "react";
 import "./App.scss";
 import Input from "./components/input";
 import NameTag from "./components/nameTag";
-
+import Item from './components/item'
  function App() {
-   /*
-  const [age, setAge] = useState(21);
 
-  const ageUpHandle = () => {
-    setAge(age +1)
-  }
-
-  const ageDownHandle = () => {
-    setAge(age -1)
-  } */
-
-  const initialName = [
-    {firstName: "John", lastName:"Anderson"},
-    {firstName: "Joli", lastName:"Johanson"},
-    {firstName: "Hanna", lastName:"Anderson"}
-
+  const initList = [
+    {name: 'Tomato', calorie: '20'},
+    {name: 'Rice', calorie: '40'},
+    {name: 'Candy', calorie: '100'}
   ]
+  const [list, setList] = useState(initList)
 
-  const [names, setNames] = useState(initialName) 
+  
+  const removeUnhealthyHandle = (e) => {
+    const filterList = list.filter(v => v.calorie <=50)
+    setList(filterList)
+  }
 
   return (
     <div>
       <header className="App-header">
-      <h1 className="nameStyle nameTagTitle">Names List</h1>
-        {/* <Input placeholder="Skrev ditt namn här!" type="text"></Input> */}
-        {/* <NameTag firstName="Peter" lastName="Anderson"></NameTag>
-        <NameTag firstName="Joli" lastName="Johanson"></NameTag>
-        <NameTag firstName="Hanna" lastName="Hanna"></NameTag> */}
+        <h1>Grocery List</h1>
         {
-
-        names.map((value,index) => {
-          return (
-            <NameTag key={`${index}${value.firstName}${value.lastName}`} firstName={value.firstName} lastName={value.lastName}></NameTag>
-          )
-        })
+          list.map((v,k)=>{
+            return <Item key={`${k}${v.name}${v.calorie}`} item={v}></Item>
+          })
         }
+
+        <button onClick={removeUnhealthyHandle} className='removeButton' >Remove Unhealthy
+        
+        </button>
       </header>
     </div>
   );

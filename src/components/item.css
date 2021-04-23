@@ -1,0 +1,13 @@
+.list-st{
+    border: 1px solid gray;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.removeButton {
+    margin-top: 30px;
+    width: 200px;
+    height: 80px;
+}
