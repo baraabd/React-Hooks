@@ -9,11 +9,18 @@ const Item = (props) => {
         <div>
             <div className="list-st">
                 <div className="listContainer">
-                    <h3>{props.item.name}</h3>
+
+                    {
+                        props.editTable ? (
+                        <input type="text" defaultValue={props.item.name} />
+                        ) : (
+                        <h3 onDoubleClick={props.onDoubleClick}>{props.item.name}</h3>
+                    )}
+
                     <h3>{props.item.calorie} C</h3>
                     <div className="iconContainer">
-                        <FontAwesomeIcon name = {props.item.name} onClick = {props.onClick}  icon={faBan} size="3x" transform="shrink-6 left-4" className="iconDelete listIcon"/>
-                        <FontAwesomeIcon  onClick={props.onClickLike} icon={faThumbsUp} size="3x" transform="shrink-6 left-4" className="iconLike listIcon" />
+                        <FontAwesomeIcon name={props.item.name} onClick={props.onClick} icon={faBan} size="3x" transform="shrink-6 left-4" className="iconDelete listIcon" />
+                        <FontAwesomeIcon onClick={props.onClickLike} icon={faThumbsUp} size="3x" transform="shrink-6 left-4" className="iconLike listIcon" />
                     </div>
                 </div>
             </div>
