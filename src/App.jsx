@@ -31,6 +31,15 @@ function App() {
     
     seteditTable(true);
   };
+
+  const saveDataHandle = (e, index) => {
+    
+    if (e.key=== "Enter") {
+      seteditTable(false);
+      const copyList = [...list]
+      copyList[index].name= e.target.value
+    }
+  };
   
 
   /* const removeItemHandle = (e) => {
@@ -44,11 +53,13 @@ function App() {
         {list.map((v, k) => {
           return (
             <Item
-              key={`${k}${v.name}${v.calorie}`}
-              item={v}
-              onClick={removeItemHandle}
+              key= {`${k}${v.name}${v.calorie}`}
+              item= {v}
+              onClick= {removeItemHandle}
               editTable= {editTable}
               onDoubleClick= {makeEditTableHandle}
+              onKeyPress= {saveDataHandle}
+              index= {k}
             ></Item>
           );
         })}
