@@ -13,24 +13,36 @@ import Item from './components/item'
   const [list, setList] = useState(initList)
 
   
-  const removeUnhealthyHandle = (e) => {
+  /* const removeUnhealthyHandle = (e) => {
     const filterList = list.filter(v => v.calorie <=50)
     setList(filterList)
+  } */
+
+  function removeItemHandle(e) {
+    console.dir(e.target.getAttribute('name'))
+
+    const filteredList = list.filter(v => v.name !== e.target.getAttribute('name'))
+    setList(filteredList)
   }
 
+  /* const removeItemHandle = (e) => {
+    console.dir(e.target)
+  } */
+
+  
   return (
     <div>
       <header className="App-header">
         <h1>Grocery List</h1>
         {
           list.map((v,k)=>{
-            return <Item key={`${k}${v.name}${v.calorie}`} item={v}></Item>
+            return <Item key={`${k}${v.name}${v.calorie}`} item={v} onClick={removeItemHandle}></Item>
           })
         }
 
-        <button onClick={removeUnhealthyHandle} className='removeButton' >Remove Unhealthy
+        {/* <button onClick={removeUnhealthyHandle} className='removeButton' >Remove Unhealthy 
         
-        </button>
+        </button>*/}
       </header>
     </div>
   );
