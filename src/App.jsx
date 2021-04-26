@@ -3,54 +3,41 @@ import "./App.scss";
 import Input from "./components/input";
 import NameTag from "./components/nameTag";
 import Item from "./components/item";
+import useList from './Hooks/useList'
+
+
+const initList = [
+  { name: "Tomato", calorie: "20" },
+  { name: "Rice", calorie: "40" },
+  { name: "Candy", calorie: "100" },
+];
+
 function App() {
-  const initList = [
-    { name: "Tomato", calorie: "20" },
-    { name: "Rice", calorie: "40" },
-    { name: "Candy", calorie: "100" },
-  ];
-  const [list, setList] = useState(initList);
+  
+  const items = useList(initList);
   const [editTable, seteditTable] = useState(false);
 
-  /* const removeUnhealthyHandle = (e) => {
-    const filterList = list.filter(v => v.calorie <=50)
-    setList(filterList)
-  } */
-
-
   const removeItemHandle = (e) => {
-    console.dir(e.target.getAttribute("name"));
-
-    const filteredList = list.filter(
-      (v) => v.name !== e.target.getAttribute("name")
-    );
-    setList(filteredList);
+    items.removeItem(e.target.name);
   };
 
   const makeEditTableHandle = () => {
-    
     seteditTable(true);
   };
 
   const saveDataHandle = (e, index) => {
-    
     if (e.key=== "Enter") {
       seteditTable(false);
-      const copyList = [...list]
-      copyList[index].name= e.target.value
+      items.saveItem(index, e.target.value)
     }
   };
   
-
-  /* const removeItemHandle = (e) => {
-    console.dir(e.target)
-  } */
 
   return (
     <div>
       <header className="App-header">
         <h1>Grocery List</h1>
-        {list.map((v, k) => {
+        {items.list.map((v, k) => {
           return (
             <Item
               key= {`${k}${v.name}${v.calorie}`}
