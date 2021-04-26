@@ -18,7 +18,7 @@ function App() {
   const [editTable, seteditTable] = useState(false);
 
   const removeItemHandle = (e) => {
-    items.removeItem(e.target.name);
+    items.removeItem(e.target.getAttribute("name"));
   };
 
   const makeEditTableHandle = () => {
