@@ -1,48 +1,45 @@
 import React, { useState, useEffect } from "react";
 import "./App.scss";
-//import Input from "./components/input";
-//import NameTag from "./components/nameTag";
 
-let born = false
+const initXY = {
+  x: null,
+  y: null
+};
+
 function App() {
-  const [growth, setgrowth] = useState(0)
-  const [nirvana, setNirvana] = useState(false)
+  const [time, setTime] = useState(Date);
+  const [xy, setXY] = useState(initXY);
 
   useEffect(() => {
-    console.log('I am born')
-  }, [])
+    let handle = setInterval(() => {
+      setTime(Date);
+    }, 1000);
+
+    return () => {
+      clearInterval(handle);
+    };
+  });
+
+  const mousemoveHandle = (e) => {
+    setXY({
+      x: e.clientX,
+      y: e.clientY
+    });
+  }
+  
 
   useEffect(() => {
-    if (born) {
-      document.title = "Nirvana attained"
-    }
-  },[nirvana])
-
-useEffect(() => {
-  if (born) {
-    console.log('Make mistake and learn')
-  } else {
-    born = true
-  }
-  if (growth > 70) {
-    setNirvana(true)
-  }
-
-  return function cleanup() {
-    console.log('cleanup after mistakes')
-  }
-})
-
-const growthHandle = () =>{
-  setgrowth(growth + 10)
-}
-
+    window.addEventListener("mousemove", mousemoveHandle);
+    return () => {
+      window.removeEventListener("mousemove", mousemoveHandle);
+    };
+  });
   return (
-    <div>
+    <div className="App">
       <header className="App-header">
-        <h2>Use Effect</h2>
-        <h3>growth: {growth}</h3>
-        <button onClick={growthHandle}>Learn and grow</button>
+        <h2>Use Effect Examples</h2>
+        <h3>Date & Time : {time}</h3>
+        <h3>{`x:${xy.x}, y:${xy.y}`}</h3>
       </header>
     </div>
   );
