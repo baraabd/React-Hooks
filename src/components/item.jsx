@@ -19,7 +19,7 @@ const Item = (props) => {
             <h3 onDoubleClick={props.onDoubleClick}>{props.item.name}</h3>
           )}
 
-          <h3>{props.item.calorie} C</h3>
+          <h3>{props.item.calorie}</h3>
           <div className="iconContainer">
             <FontAwesomeIcon
               name={props.item.name}
