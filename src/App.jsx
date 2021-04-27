@@ -1,94 +1,48 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 //import Input from "./components/input";
 //import NameTag from "./components/nameTag";
-import Item from "./components/item";
-import useList from "./Hooks/useList";
-import InputText from "./components/inputText";
-import SelectOption from "./components/selectOption";
 
-const initList = [
-  { name: "Tomato", calorie: "Low" },
-  { name: "Rice", calorie: "Mid" },
-  { name: "Candy", calorie: "High" },
-];
-
+let born = false
 function App() {
-  const [name, setname] = useState("default");
-  const [calorie, setcalorie] = useState("High");
+  const [growth, setgrowth] = useState(0)
+  const [nirvana, setNirvana] = useState(false)
 
-  const items = useList(initList);
-  const [editTable, seteditTable] = useState(false);
+  useEffect(() => {
+    console.log('I am born')
+  }, [])
 
-  const nameRef = useRef();
-  const calorieRef = useRef();
-  const submitRef = useRef();
-
-  
-
-  const removeItemHandle = (e) => {
-    items.removeItem(e.target.getAttribute("name"));
-  };
-
-  const makeEditTableHandle = () => {
-    seteditTable(true);
-  };
-
-  const saveDataHandle = (e, index) => {
-    if (e.key === "Enter") {
-      seteditTable(false);
-      items.saveItem(index, e.target.value);
+  useEffect(() => {
+    if (born) {
+      document.title = "Nirvana attained"
     }
-  };
+  },[nirvana])
 
-  const nameKeyDownHandle = (e) => {
-    if (e.key== "Enter") {
-      
-    }
+useEffect(() => {
+  if (born) {
+    console.log('Make mistake and learn')
+  } else {
+    born = true
+  }
+  if (growth > 70) {
+    setNirvana(true)
   }
 
-  const selectKeyDownHandle = (e) => {
-    if (e.key== "Enter") {
-      
-    }
+  return function cleanup() {
+    console.log('cleanup after mistakes')
   }
+})
+
+const growthHandle = () =>{
+  setgrowth(growth + 10)
+}
 
   return (
     <div>
       <header className="App-header">
-        <div>
-          <h1>Grocery List</h1>
-          {items.list.map((v, k) => {
-            return (
-              <Item
-                key={`${k}${v.name}${v.calorie}`}
-                item={v}
-                onClick={removeItemHandle}
-                editTable={editTable}
-                onDoubleClick={makeEditTableHandle}
-                onKeyPress={saveDataHandle}
-                index={k}
-              ></Item>
-            );
-          })}
-
-          {/* <button onClick={removeUnhealthyHandle} className='removeButton' >Remove Unhealthy 
-        
-        </button>*/}
-        </div>
-        <div className="inputContainer">
-          <InputText
-            ref ={nameRef}
-            type ="text"
-            placeholder ="Type product name here!"
-            onKeyDown={nameKeyDownHandle}
-          ></InputText>
-
-          <SelectOption
-          selectKeyDown={selectKeyDownHandle}
-          
-          ></SelectOption>
-        </div>
+        <h2>Use Effect</h2>
+        <h3>growth: {growth}</h3>
+        <button onClick={growthHandle}>Learn and grow</button>
       </header>
     </div>
   );
