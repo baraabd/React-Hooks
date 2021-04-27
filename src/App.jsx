@@ -1,45 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.scss";
 
-const initXY = {
-  x: null,
-  y: null
+const initProfile = {
+  followers: null,
+  publicRepos: null
 };
-
 function App() {
-  const [time, setTime] = useState(Date);
-  const [xy, setXY] = useState(initXY);
+  const [profile, setProfile] = useState(initProfile);
 
-  useEffect(() => {
-    let handle = setInterval(() => {
-      setTime(Date);
-    }, 1000);
+   const getProfile = async()=> {
+    const response = await fetch("https://api.github.com/users/baraabd");
+    const json = await response.json();
 
-    return () => {
-      clearInterval(handle);
-    };
-  });
-
-  const mousemoveHandle = (e) => {
-    setXY({
-      x: e.clientX,
-      y: e.clientY
+    setProfile({
+      followers: json.followers,
+      publicRepos: json.public_repos
     });
   }
-  
 
   useEffect(() => {
-    window.addEventListener("mousemove", mousemoveHandle);
-    return () => {
-      window.removeEventListener("mousemove", mousemoveHandle);
-    };
-  });
+    getProfile();
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Use Effect Examples</h2>
-        <h3>Date & Time : {time}</h3>
-        <h3>{`x:${xy.x}, y:${xy.y}`}</h3>
+        <h2>Fetch Data</h2>
+        <h3>{`follower: ${profile.followers}, repos: ${
+          profile.publicRepos
+        }`}</h3>
       </header>
     </div>
   );
