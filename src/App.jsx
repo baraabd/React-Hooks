@@ -1,33 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
+import Child from './components/child';
+
 import "./App.scss";
 
-const initProfile = {
-  followers: null,
-  publicRepos: null
-};
-function App() {
-  const [profile, setProfile] = useState(initProfile);
+const App = () =>{
+  const [i, setI] = useState(0);
 
-   const getProfile = async()=> {
-    const response = await fetch("https://api.github.com/users/baraabd");
-    const json = await response.json();
+  const callBackClick = useCallback(() => {
+    console.log('called')
+    setI(c => c + 1);
+  }, [i]);
 
-    setProfile({
-      followers: json.followers,
-      publicRepos: json.public_repos
-    });
-  }
+  const memoizedChild = useMemo(()=>{
+    return <Child></Child>
+  }, [i]);  
 
-  useEffect(() => {
-    getProfile();
-  }, []);
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Fetch Data</h2>
-        <h3>{`follower: ${profile.followers}, repos: ${
-          profile.publicRepos
-        }`}</h3>
+        <h3> Use Memo</h3>
+        <h2>i: {i}</h2>
+        <button onClick={callBackClick}>Increment I</button>
+        <h3> normal render</h3>
+        <Child></Child>
+        <h3> Memo render</h3>
+        {memoizedChild}
+        
       </header>
     </div>
   );
