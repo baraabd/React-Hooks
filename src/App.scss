@@ -64,26 +64,24 @@
   margin: 5px;
 }
 
-form.formContainer {
+.inputContainer {
   margin-left: 20px;
   border: 1px solid gray;
   padding: 20px;
 }
 
-.nameContainer {
-  margin-bottom: 10px;
-}
 
-.calorieContainer {
-  margin-bottom: 10px;
-}
 .buttonStyle {
   width: 100px;
   color: black;
   height: 40px;
   margin: 5px;
 }
-input, select, button{
-  font-size: 20px;
+
+
+.selectOption {
+  font-size: 30px;
+  margin-top: 20px;
+  width: 100px;
 }
 

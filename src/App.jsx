@@ -1,9 +1,11 @@
-import react, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./App.scss";
 //import Input from "./components/input";
 //import NameTag from "./components/nameTag";
 import Item from "./components/item";
 import useList from "./Hooks/useList";
+import InputText from "./components/inputText";
+import SelectOption from "./components/selectOption";
 
 const initList = [
   { name: "Tomato", calorie: "Low" },
@@ -22,20 +24,7 @@ function App() {
   const calorieRef = useRef();
   const submitRef = useRef();
 
-  useEffect(() => {
-    nameRef.current.focus();
-  }, []);
-
-  const keyPressHandle = (e)=> {
-    if (e.keyCode == 13) {
-      if (e.target.id == "nameInput") {
-        alert("fds")
-      }
-      if (e.target.id == "calorieInput") {
-        submitRef.current.focus()
-      }
-    }
-  }
+  
 
   const removeItemHandle = (e) => {
     items.removeItem(e.target.getAttribute("name"));
@@ -52,17 +41,17 @@ function App() {
     }
   };
 
-  const handleName = (e) => {
-    setname(e.target.value);
-  };
+  const nameKeyDownHandle = (e) => {
+    if (e.key== "Enter") {
+      
+    }
+  }
 
-  const handleCalorie = (e) => {
-    setcalorie(e.target.value);
-  };
-
-  const onSubmitHandle = () => {
-    console.log("state = ", name, calorie);
-  };
+  const selectKeyDownHandle = (e) => {
+    if (e.key== "Enter") {
+      
+    }
+  }
 
   return (
     <div>
@@ -87,44 +76,18 @@ function App() {
         
         </button>*/}
         </div>
-        <div>
-          <form onSubmit={onSubmitHandle} className="formContainer">
-            <div className="nameContainer">
-              <span>Name of pruducct:</span>
-              <input
-                value={name}
-                onChange={handleName}
-                onKeyPress={keyPressHandle}
-                ref={nameRef}
-                id = "nameInput"
-                type="text"
-                placeholder="Rice"
-              />
-            </div>
-            <div className="calorieContainer">
-              <span>Calorie:</span>
-              <select
-                value={calorie}
-                onChange={handleCalorie}
-                onKeyDown={keyPressHandle}
-                ref={calorieRef}
-                id = "calorieInput"
-              >
-                <option value="high">High</option>
-                <option value="mid">Mid</option>
-                <option value="low">Low</option>
-              </select>
-            </div>
-            <div className="buttonContainer">
-              <button className="buttonStyle"
-               onKeyDown={keyPressHandle}
-               ref={submitRef}
-               id = "submitId"
-               >
-                Submit
-              </button>
-            </div>
-          </form>
+        <div className="inputContainer">
+          <InputText
+            ref ={nameRef}
+            type ="text"
+            placeholder ="Type product name here!"
+            onKeyDown={nameKeyDownHandle}
+          ></InputText>
+
+          <SelectOption
+          selectKeyDown={selectKeyDownHandle}
+          
+          ></SelectOption>
         </div>
       </header>
     </div>
