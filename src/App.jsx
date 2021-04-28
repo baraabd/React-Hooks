@@ -1,18 +1,30 @@
-import React, { useState } from "react";
-import usePrevious from './Hooks/usePrevious';
-import "./App.scss";
+import React, {useState} from 'react';
+import './App.scss';
+import useCustomFetch from './Hooks/useCustomFetch';
 
-const App = () =>{
-  const [age, setAge] = useState(21);
- const previousAge = usePrevious(age);
- 
+
+const App =()=> {
+  const [url, setUrl] = useState(null);
+  const [data, loading, error] = useCustomFetch(url);
+
+  const getFollowers = (e)=>{
+    if(e.key === 'Enter'){
+      setUrl("https://api.github.com/users/" + e.target.value);
+    }
+  }
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Current Age : {age}</h2>
-        <h2>Previous Age : {previousAge}</h2>
-        <button onClick={()=>setAge(age - 1)}>Make Me Younger</button>
+        <h2>
+          GitID:
+          <input onKeyPress={getFollowers}></input>
 
+          {loading && url  && <div>Loading ....</div>}
+          {!loading && data && data.rData && data.rData.followers && (
+            <div>Followers: {data.rData.followers}</div>
+          )}
+          {error && <div>Error: {error}</div>}
+        </h2>
       </header>
     </div>
   );
